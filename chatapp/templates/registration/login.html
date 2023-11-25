@@ -11,7 +11,7 @@
                 <a href="/signup" class="text-blue-400 border-b border-blue-400"> register your free account</a>
             </p>
         </div>
-        <div class="max-w-md w-full mx-auto bg-gray-200 rounded-lg p-7 space-y-3">
+        <div class="max-w-md w-full mx-auto bg-gray-200 rounded-md p-6 space-y-3 font-mono text-black border border-b">
             <form method="post">
                 {% csrf_token %}
                 <div class="flex flex-col">
@@ -23,12 +23,12 @@
                     <input class="border rounded-md px-3 py-2 mb-5" type="password" name="password" required/>
                 </div>
                 <div>
-                    <button type="submit" class="w-full rounded-md bg-blue-400 text-white py-2">Sign in</button>
+                    <button type="submit" class="w-full rounded-md bg-black text-white py-2">Sign in</button>
                 </div>
             </form>
             <div class="flex justify-between text-sm">
                 <div class="flex items-center space-x-2">
-                    <input type="checkbox" name="rememberme" />
+                    <input type="checkbox" name="rememberme">
                     <label htmlFor="rememberme">Remember Me</label>
                 </div>
                 <div>

@@ -9,7 +9,7 @@ from .forms import *
 
 @login_required(login_url='/login')
 def lobby(request):
-    return render(request, 'chat/lobby.html', {"rooms": Room.objects.all()})
+    return render(request, 'lobby.html', {"rooms": Room.objects.all()})
 
 
 @login_required(login_url='/login')
@@ -23,7 +23,7 @@ def create_room(request):
             return redirect('/lobby')
     else:
         form = RoomForm()
-    return render(request, 'chat/create_room.html', {"form": form})
+    return render(request, 'create_room.html', {"form": form})
 
 
 
@@ -31,7 +31,7 @@ def create_room(request):
 def room(request, pk):
     room = Room.objects.get(id=pk)
     messages = Message.objects.filter(room=room)[0:25]
-    return render(request, 'chat/room.html', {"room_id": pk, "user": request.user, "sender":request.user.username,"messages": messages})
+    return render(request, 'room.html', {"room_id": pk, "user": request.user.username, "messages": messages, 'room':room.name})
         
 
 def signup(request):
@@ -44,12 +44,12 @@ def signup(request):
     else:
         form = RegisterForm()
 
-    return render(request, 'registration/signup.html', {"form":form})
+    return render(request, 'signup.html', {"form":form})
 
 
 def login(request):
     if request.method == 'GET':
-        return render(request, 'registration/login.html')
+        return render(request, 'login.html')
     elif request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -58,7 +58,7 @@ def login(request):
             auth_login(request, user)
             return redirect('/lobby')
         else:
-            return render(request, "registration/login.html", {
+            return render(request, "login.html", {
                 "msg": "Invalid login credentials"
             })
     else:
@@ -69,16 +69,23 @@ def login(request):
 def search(request):
     query = request.GET.get('q')
 
-    rooms = Room.objects.filter(name__icontains=query)
+    if query is not None and query.strip():  # Check if query is not None and is not an empty string
+        rooms = Room.objects.filter(name__icontains=query)
+    else:
+        rooms = []
 
     context = {
         'query': query,
         'rooms': rooms
     }
 
-    return render(request, 'chat/search.html', context)
+    return render(request, 'search.html', context)
 
 
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+def about(request):
+    random = Message
+    return render(request, 'about.html')

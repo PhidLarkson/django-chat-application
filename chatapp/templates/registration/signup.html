@@ -3,15 +3,15 @@
     {%if msg%}
     <h3>{{msg}}</h3>
     {%endif%}
-    <main class="min-h-screen flex flex-col items-center justify-center">
+    <main class="min-h-screen flex flex-col items-center justify-center text-black">
         <div class="space-y-3 my-5">
-            <h1 class="text-3xl font-extrabold">Register for a free account</h1>
+            <h1 class="text-3xl font-extrabold text-white">Register for a free account</h1>
             <p class="text-center">
                 or 
                 <a href="/login" class="text-blue-400 border-b border-blue-400"> Login to an existing one</a>
             </p>
         </div>
-        <div class="max-w-md w-full mx-auto bg-gray-200 rounded-lg p-7 space-y-3">
+        <div class="max-w-md w-full mx-auto bg-gray-200 rounded-lg p-7 space-y-3 font-mono">
             <form method="post">
                 {% csrf_token %}
                 <div class="flex flex-col">
